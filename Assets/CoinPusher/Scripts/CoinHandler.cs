@@ -57,22 +57,30 @@ namespace CoinPusher
 
             //Invoke(nameof(MoveUp), MoveTime + 0.1f);
         }
-        //private void OnTriggerEnter2D(Collider2D collision)
-        //{
-        //    if (IsReadyWithCollisions && collision.CompareTag("PushBoxParent"))
-        //    {
-        //        Debug.Log("---------- Attaching coin to parent");
-        //        gameObject.transform.SetParent(collision.gameObject.transform);
-        //        PushBoxHandler.Instance.AttachedCoinsList.Add(gameObject);
-        //    }
-        //}
-        //private void OnTriggerStay2D(Collider2D collision)
-        //{
-        //    if (IsReadyWithCollisions && collision.CompareTag("PushBoxParent"))
-        //    {
-        //        Debug.Log("---------- Attaching coin to parent");
-        //        gameObject.transform.SetParent(collision.gameObject.transform);
-        //    }
-        //}
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+                   
+            if (collision.CompareTag("Hills") && _CoinState == GameManager.coinState.AttachedToParent)
+            {
+                Debug.Log("----- coin triggered to hills");
+                _CoinState = GameManager.coinState.DetachFromParent;
+                PushBoxHandler.Instance.AttachedCoinsList.Remove(this.gameObject);
+                transform.SetParent(PushBoxHandler.Instance.PlayArea);
+            }
+            //if (IsReadyWithCollisions && collision.CompareTag("PushBoxParent"))
+            //{
+            //    Debug.Log("---------- Attaching coin to parent");
+            //    gameObject.transform.SetParent(collision.gameObject.transform);
+            //    PushBoxHandler.Instance.AttachedCoinsList.Add(gameObject);
+            //}
+        }
+        private void OnTriggerStay2D(Collider2D collision)
+        {
+            //if (IsReadyWithCollisions && collision.CompareTag("PushBoxParent"))
+            //{
+            //    Debug.Log("---------- Attaching coin to parent");
+            //    gameObject.transform.SetParent(collision.gameObject.transform);
+            //}
+        }
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PushBoxParent
   - PushBoxPush
+  - Hills
   layers:
   - Default
   - TransparentFX

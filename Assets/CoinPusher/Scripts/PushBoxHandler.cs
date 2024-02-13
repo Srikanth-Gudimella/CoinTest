@@ -22,12 +22,12 @@ namespace CoinPusher
         public Transform PlayArea;
         void MoveDown()
         {
-            foreach (GameObject obj in AttachedCoinsList)
-            {
-                obj.transform.SetParent(PlayArea);
-                obj.GetComponent<CoinHandler>()._CoinState = GameManager.coinState.ReadyToCollide;
-            }
-            AttachedCoinsList.Clear();
+            //foreach (GameObject obj in AttachedCoinsList)
+            //{
+            //    obj.transform.SetParent(PlayArea);
+            //    obj.GetComponent<CoinHandler>()._CoinState = GameManager.coinState.ReadyToCollide;
+            //}
+            //AttachedCoinsList.Clear();
             PushBoxPushCollider.isTrigger = false;
 
             iTween.Stop(gameObject);
