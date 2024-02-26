@@ -8,18 +8,22 @@ namespace CoinPusher
     {
         public float MoveTime = 1.5f;
         public iTween.EaseType easetype;
-        public BoxCollider2D thisCollider;
+        public CircleCollider2D thisCollider;
         public bool IsReadyWithCollisions;
         public GameManager.coinState _CoinState;
-        
 
-        private void Start()
+        private void Awake()
         {
             _CoinState = GameManager.coinState.Falling;
             IsReadyWithCollisions = false;
-            thisCollider = GetComponent<BoxCollider2D>();
+            thisCollider = GetComponent<CircleCollider2D>();
             //Invoke(nameof(MoveDown), 0f);
             StartCoroutine(MoveDown());
+        }
+
+        private void Start()
+        {
+           
 
         }
         public LayerMask layerMask; // The layer(s) to check against
@@ -37,10 +41,17 @@ namespace CoinPusher
                 if (hit.collider != null)
                 {
                     Debug.Log("-------- Object is above another collider!");
-                    gameObject.transform.SetParent(hit.collider.gameObject.transform);
+                    //gameObject.transform.SetParent(hit.collider.gameObject.transform);
+                    //gameObject.transform.SetParent(PushBoxHandler.Instance.transform);
+                    gameObject.transform.SetParent(PushBoxHandler.Instance.PushBoxParentArea);
+
                     PushBoxHandler.Instance.AttachedCoinsList.Add(gameObject);
+                    //gameObject.transform.position = new Vector3(0, 2.5f, 0);
                     _CoinState = GameManager.coinState.AttachedToParent;
+                   // this.gameObject.transform.localPosition = new Vector3(0, 2000.5f, 0);
                     // You can do something here, like changing color, etc.
+
+
                 }
             }
         }
@@ -50,7 +61,8 @@ namespace CoinPusher
             yield return new WaitForSeconds(0);
             iTween.Stop(gameObject);
             iTween.MoveTo(gameObject, iTween.Hash("y", 0.5f, "time", MoveTime, "islocal", true, "easetype", easetype));
-            yield return new WaitForSeconds(MoveTime);
+            yield return new WaitForSeconds(MoveTime+0.05f);
+            thisCollider.isTrigger = false;
             _CoinState = GameManager.coinState.FallingFinish;
 
             //IsReadyWithCollisions = true;
@@ -60,13 +72,15 @@ namespace CoinPusher
         private void OnTriggerEnter2D(Collider2D collision)
         {
                    
-            if (collision.CompareTag("Hills") && _CoinState == GameManager.coinState.AttachedToParent)
-            {
-                Debug.Log("----- coin triggered to hills");
-                _CoinState = GameManager.coinState.DetachFromParent;
-                PushBoxHandler.Instance.AttachedCoinsList.Remove(this.gameObject);
-                transform.SetParent(PushBoxHandler.Instance.PlayArea);
-            }
+            //if (collision.CompareTag("Hills") && _CoinState == GameManager.coinState.AttachedToParent)
+            //{
+            //    Debug.Log("----- coin triggered to hills");
+            //    _CoinState = GameManager.coinState.DetachFromParent;
+            //    PushBoxHandler.Instance.AttachedCoinsList.Remove(this.gameObject);
+            //    transform.SetParent(PushBoxHandler.Instance.PlayArea);
+            //    _CoinState = GameManager.coinState.ReadyToCollide;
+            //    //show coin animation as fall from top of box to down small rotate anim
+            //}
             //if (IsReadyWithCollisions && collision.CompareTag("PushBoxParent"))
             //{
             //    Debug.Log("---------- Attaching coin to parent");
@@ -81,6 +95,24 @@ namespace CoinPusher
             //    Debug.Log("---------- Attaching coin to parent");
             //    gameObject.transform.SetParent(collision.gameObject.transform);
             //}
+        }
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("Hills") && _CoinState == GameManager.coinState.AttachedToParent)
+            {
+                Debug.Log("----- coin triggered to hills");
+                _CoinState = GameManager.coinState.DetachFromParent;
+                PushBoxHandler.Instance.AttachedCoinsList.Remove(this.gameObject);
+                transform.SetParent(PushBoxHandler.Instance.PlayArea);
+                _CoinState = GameManager.coinState.ReadyToCollide;
+                //show coin animation as fall from top of box to down small rotate anim
+            }
+            if (PushBoxHandler.Instance.PushBoxState==GameManager.pushBoxState.MovingDown && _CoinState!=GameManager.coinState.ReadyToCollide)
+            {
+                //show coin animation
+                _CoinState = GameManager.coinState.ReadyToCollide;
+                //move littlebit down
+            }
         }
     }
 }

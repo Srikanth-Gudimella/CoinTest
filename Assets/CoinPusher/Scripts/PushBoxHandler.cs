@@ -9,6 +9,8 @@ namespace CoinPusher
         public static PushBoxHandler Instance;
         public BoxCollider2D PushBoxPushCollider;
         public List<GameObject> AttachedCoinsList = new List<GameObject>();
+        public GameManager.pushBoxState PushBoxState;
+        public Transform PushBoxParentArea;
         private void Awake()
         {
             Instance = this;
@@ -28,6 +30,7 @@ namespace CoinPusher
             //    obj.GetComponent<CoinHandler>()._CoinState = GameManager.coinState.ReadyToCollide;
             //}
             //AttachedCoinsList.Clear();
+            PushBoxState = GameManager.pushBoxState.MovingDown;
             PushBoxPushCollider.isTrigger = false;
 
             iTween.Stop(gameObject);
@@ -36,6 +39,8 @@ namespace CoinPusher
         }
         void MoveUp()
         {
+            PushBoxState = GameManager.pushBoxState.Movingup;
+
             PushBoxPushCollider.isTrigger = true;
 
             iTween.Stop(gameObject);

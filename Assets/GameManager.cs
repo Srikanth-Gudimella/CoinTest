@@ -17,5 +17,10 @@ public class GameManager : MonoBehaviour
         DetachFromParent,
         ReadyToCollide
     }
-    
+    public enum pushBoxState
+    {
+        MovingDown,
+        Movingup
+    }
+
 }
