@@ -42,8 +42,8 @@ namespace CoinPusher
                 {
                     Debug.Log("-------- Object is above another collider!");
                     //gameObject.transform.SetParent(hit.collider.gameObject.transform);
-                    //gameObject.transform.SetParent(PushBoxHandler.Instance.transform);
-                    gameObject.transform.SetParent(PushBoxHandler.Instance.PushBoxParentArea);
+                    gameObject.transform.SetParent(PushBoxHandler.Instance.transform);
+                   // gameObject.transform.SetParent(PushBoxHandler.Instance.PushBoxParentArea);
 
                     PushBoxHandler.Instance.AttachedCoinsList.Add(gameObject);
                     //gameObject.transform.position = new Vector3(0, 2.5f, 0);
@@ -96,6 +96,19 @@ namespace CoinPusher
             //    gameObject.transform.SetParent(collision.gameObject.transform);
             //}
         }
+        IEnumerator MoveDownToBoard()
+        {
+            yield return new WaitForSeconds(0);
+            iTween.Stop(gameObject);
+            iTween.MoveTo(gameObject, iTween.Hash("y", 0.4f, "time", MoveTime, "islocal", true, "easetype", easetype));
+            //yield return new WaitForSeconds(MoveTime + 0.05f);
+            //thisCollider.isTrigger = false;
+            //_CoinState = GameManager.coinState.FallingFinish;
+
+            //IsReadyWithCollisions = true;
+
+            //Invoke(nameof(MoveUp), MoveTime + 0.1f);
+        }
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.CompareTag("Hills") && _CoinState == GameManager.coinState.AttachedToParent)
@@ -105,6 +118,7 @@ namespace CoinPusher
                 PushBoxHandler.Instance.AttachedCoinsList.Remove(this.gameObject);
                 transform.SetParent(PushBoxHandler.Instance.PlayArea);
                 _CoinState = GameManager.coinState.ReadyToCollide;
+                StartCoroutine(MoveDownToBoard());
                 //show coin animation as fall from top of box to down small rotate anim
             }
             if (PushBoxHandler.Instance.PushBoxState==GameManager.pushBoxState.MovingDown && _CoinState!=GameManager.coinState.ReadyToCollide)
