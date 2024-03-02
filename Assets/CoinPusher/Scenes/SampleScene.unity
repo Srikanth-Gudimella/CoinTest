@@ -275,8 +275,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63809736}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.3045, z: -0.1}
-  m_LocalScale: {x: 0.12195122, y: 0.032206994, z: 1}
+  m_LocalPosition: {x: 0, y: -0.287, z: -0.1}
+  m_LocalScale: {x: 0.12195122, y: 0.025, z: 1}
   m_Children: []
   m_Father: {fileID: 243419523}
   m_RootOrder: 0
@@ -806,7 +806,7 @@ GameObject:
   - component: {fileID: 504741313}
   - component: {fileID: 504741314}
   m_Layer: 0
-  m_Name: BorderColliders
+  m_Name: LeftBorder
   m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -867,7 +867,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 01c01cae7663a9847955d32f4b0b5fbc, type: 3}
-  m_Color: {r: 1, g: 0.4292453, b: 0.4292453, a: 1}
+  m_Color: {r: 1, g: 0.4292453, b: 0.4292453, a: 0.003921569}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1487,8 +1487,8 @@ GameObject:
   - component: {fileID: 981587052}
   - component: {fileID: 981587053}
   m_Layer: 0
-  m_Name: BorderColliders (1)
-  m_TagString: Border
+  m_Name: RightBorder
+  m_TagString: RightBorder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1548,7 +1548,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 01c01cae7663a9847955d32f4b0b5fbc, type: 3}
-  m_Color: {r: 1, g: 0.4292453, b: 0.4292453, a: 1}
+  m_Color: {r: 1, g: 0.4292453, b: 0.4292453, a: 0.003921569}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1758,8 +1758,8 @@ GameObject:
   - component: {fileID: 1074295930}
   - component: {fileID: 1074295931}
   m_Layer: 0
-  m_Name: BorderColliders (2)
-  m_TagString: Border
+  m_Name: DownBorder
+  m_TagString: DownBorder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1772,7 +1772,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1074295928}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -8.12, z: 0.14}
+  m_LocalPosition: {x: 0, y: -8.22, z: 0.14}
   m_LocalScale: {x: 0.1, y: 1.0125, z: 1}
   m_Children: []
   m_Father: {fileID: 1718061815}
@@ -1819,7 +1819,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 01c01cae7663a9847955d32f4b0b5fbc, type: 3}
-  m_Color: {r: 1, g: 0.4292453, b: 0.4292453, a: 1}
+  m_Color: {r: 1, g: 0.4292453, b: 0.4292453, a: 0.003921569}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3012,10 +3012,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1718061815}
     m_Modifications:
-    - target: {fileID: 1665897069, guid: 0c8a134decc1e8e44b567c82c8f3c41d, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3403535061093684409, guid: 0c8a134decc1e8e44b567c82c8f3c41d, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -3026,7 +3022,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3403535061093684409, guid: 0c8a134decc1e8e44b567c82c8f3c41d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.93
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 3403535061093684409, guid: 0c8a134decc1e8e44b567c82c8f3c41d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3066,7 +3062,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3403535061093684415, guid: 0c8a134decc1e8e44b567c82c8f3c41d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c8a134decc1e8e44b567c82c8f3c41d, type: 3}

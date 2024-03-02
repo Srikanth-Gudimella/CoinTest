@@ -8,6 +8,8 @@ TagManager:
   - PushBoxPush
   - Hills
   - Border
+  - DownBorder
+  - RightBorder
   layers:
   - Default
   - TransparentFX

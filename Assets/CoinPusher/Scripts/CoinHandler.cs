@@ -51,8 +51,6 @@ namespace CoinPusher
                     _CoinState = GameManager.coinState.AttachedToParent;
                    // this.gameObject.transform.localPosition = new Vector3(0, 2000.5f, 0);
                     // You can do something here, like changing color, etc.
-
-
                 }
             }
         }
@@ -63,8 +61,8 @@ namespace CoinPusher
             iTween.Stop(gameObject);
             iTween.MoveTo(gameObject, iTween.Hash("y", 0.5f, "time", MoveTime, "islocal", true, "easetype", easetype));
             yield return new WaitForSeconds(MoveTime+0.05f);
-            thisCollider.isTrigger = false;
             _CoinState = GameManager.coinState.FallingFinish;
+            thisCollider.isTrigger = false;
 
             //IsReadyWithCollisions = true;
 
@@ -124,7 +122,8 @@ namespace CoinPusher
             }
             else if (collision.gameObject.CompareTag("Border"))
             {
-                Debug.Log("----- coin triggered to hills");
+                Debug.Log("----- coin triggered to Border");
+                //Time.timeScale = 0;
                 thisCollider.isTrigger = true;
                
 
@@ -137,7 +136,46 @@ namespace CoinPusher
                 }
 
                
-                StartCoroutine(ShowCoinFalling());
+                StartCoroutine(ShowCoinFalling("FallSide",0));
+                //show coin animation as fall from top of box to down small rotate anim
+            }
+            else if (collision.gameObject.CompareTag("RightBorder" +
+                ""))
+            {
+                Debug.Log("----- coin triggered to Border");
+                //Time.timeScale = 0;
+                thisCollider.isTrigger = true;
+
+
+                _CoinState = GameManager.coinState.Collected;
+
+                if (PushBoxHandler.Instance.AttachedCoinsList.Contains(this.gameObject))
+                {
+                    PushBoxHandler.Instance.AttachedCoinsList.Remove(this.gameObject);
+                    transform.SetParent(PushBoxHandler.Instance.PlayArea);
+                }
+
+
+                StartCoroutine(ShowCoinFalling("FallSide",1));
+                //show coin animation as fall from top of box to down small rotate anim
+            }
+            else if (collision.gameObject.CompareTag("DownBorder"))
+            {
+                Debug.Log("----- coin triggered to Border");
+                //Time.timeScale = 0;
+                thisCollider.isTrigger = true;
+
+
+                _CoinState = GameManager.coinState.Collected;
+
+                if (PushBoxHandler.Instance.AttachedCoinsList.Contains(this.gameObject))
+                {
+                    PushBoxHandler.Instance.AttachedCoinsList.Remove(this.gameObject);
+                    transform.SetParent(PushBoxHandler.Instance.PlayArea);
+                }
+
+
+                StartCoroutine(ShowCoinFalling("FallDown",2));
                 //show coin animation as fall from top of box to down small rotate anim
             }
             if (PushBoxHandler.Instance.PushBoxState==GameManager.pushBoxState.MovingDown && _CoinState!=GameManager.coinState.ReadyToCollide)
@@ -148,8 +186,25 @@ namespace CoinPusher
             }
 
         }
-        IEnumerator ShowCoinFalling()
+        IEnumerator ShowCoinFalling(string animTriggerValue,int BorderType)
         {
+            yield return new WaitForSeconds(0.1f);
+            switch(BorderType)
+            {
+                case 0://Left
+                    iTween.Stop(gameObject);
+                    iTween.MoveTo(gameObject, iTween.Hash("x", gameObject.transform.position.x-0.3f, "time", 0.3f, "islocal", true, "easetype", easetype));
+                    break;
+                case 1://Right
+                    iTween.Stop(gameObject);
+                    iTween.MoveTo(gameObject, iTween.Hash("x", gameObject.transform.position.x + 0.35f, "time", 0.3f, "islocal", true, "easetype", easetype));
+                    break;
+                case 2://Down
+                    iTween.Stop(gameObject);
+                    iTween.MoveTo(gameObject, iTween.Hash("y", gameObject.transform.position.y - 1f, "time", 0.3f, "islocal", true, "easetype", easetype));
+                    break;
+            }
+
             //ShowFalling Animation
             //iTween.ScaleTo(this.gameObject, iTween.Hash("y", 0f, "time", 0.7f, "islocal", true, "easetype", iTween.EaseType.linear));
 
@@ -157,6 +212,7 @@ namespace CoinPusher
             //yield return new WaitForSeconds(0.3f);
             //iTween.ScaleTo(this.gameObject, iTween.Hash("x", 0.2f, "time", 0.3f, "islocal", true, "easetype", iTween.EaseType.linear));
             CoinFallAnimator.enabled = true;
+            CoinFallAnimator.SetTrigger(animTriggerValue);
             yield return new WaitForSeconds(1.2f);
             Destroy(gameObject);
         }
