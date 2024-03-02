@@ -23,15 +23,18 @@ namespace CoinPusher
         IEnumerator SpawnCoins()
         {
             int RandomSpawnCount = Random.Range(4, 7);
-            float startPos = 0 - RandomSpawnCount * 0.5f;
-            Debug.Log("------ StartPos="+startPos+":::RandomeSpawnCount="+RandomSpawnCount);
+            float maxgap = 5;
+            float eachgap = maxgap / RandomSpawnCount;
+            float startPos = 0;// - RandomSpawnCount * 0.5f;
+            Debug.Log("------ StartPos=" + startPos + ":::RandomeSpawnCount=" + RandomSpawnCount);
+            startPos = 0-RandomSpawnCount * 0.5f * eachgap+eachgap*0.5f;
             for (int i=0;i< RandomSpawnCount; i++)
             {
                 yield return new WaitForSeconds(i * 0.2f);
                 //Vector3 SpawnPosition = new Vector3(Random.Range(-1.3f, 1.3f), 4.5f, -0.1f);
                 //Vector3 SpawnPosition = new Vector3((-1.4f+i*1f), 4.5f, -0.1f);
                 //this is left to right distance, -2 to 2
-                Vector3 SpawnPosition = new Vector3((startPos+(i*(4/ RandomSpawnCount)) + (Random.Range(-0.5f,0.5f))), 4.5f, -0.1f);
+                Vector3 SpawnPosition = new Vector3((startPos+(i*eachgap) + (Random.Range(-0.5f,0.6f))), 4.5f, -0.1f);
                 Instantiate(CoinPrefab, SpawnPosition, Quaternion.identity, PushBoxHandler.Instance.PlayArea);
             }
         }

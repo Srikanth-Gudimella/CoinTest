@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3403535061093684409}
   - component: {fileID: 3403535061093684414}
-  - component: {fileID: 3403535061093684411}
   - component: {fileID: 3403535061093684408}
   - component: {fileID: 3403535061093684410}
   - component: {fileID: 1196254595}
+  - component: {fileID: 1665897069}
   m_Layer: 30
   m_Name: Coin
   m_TagString: Untagged
@@ -86,32 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &3403535061093684411
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3403535061093684415}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.26, y: 1.33}
-    newSize: {x: 1.26, y: 1.33}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.26, y: 1.33}
-  m_EdgeRadius: 0
 --- !u!50 &3403535061093684408
 Rigidbody2D:
   serializedVersion: 4
@@ -150,6 +124,7 @@ MonoBehaviour:
   thisCollider: {fileID: 0}
   IsReadyWithCollisions: 0
   _CoinState: 0
+  CoinFallAnimator: {fileID: 1665897069}
   layerMask:
     serializedVersion: 2
     m_Bits: 536870912
@@ -170,3 +145,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!95 &1665897069
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3403535061093684415}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 053df51e3182c8240ac82505b30d8e3e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

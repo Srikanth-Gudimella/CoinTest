@@ -11,6 +11,7 @@ namespace CoinPusher
         public CircleCollider2D thisCollider;
         public bool IsReadyWithCollisions;
         public GameManager.coinState _CoinState;
+        public Animator CoinFallAnimator;
 
         private void Awake()
         {
@@ -121,12 +122,43 @@ namespace CoinPusher
                 StartCoroutine(MoveDownToBoard());
                 //show coin animation as fall from top of box to down small rotate anim
             }
+            else if (collision.gameObject.CompareTag("Border"))
+            {
+                Debug.Log("----- coin triggered to hills");
+                thisCollider.isTrigger = true;
+               
+
+                _CoinState = GameManager.coinState.Collected;
+
+                if (PushBoxHandler.Instance.AttachedCoinsList.Contains(this.gameObject))
+                {
+                    PushBoxHandler.Instance.AttachedCoinsList.Remove(this.gameObject);
+                    transform.SetParent(PushBoxHandler.Instance.PlayArea);
+                }
+
+               
+                StartCoroutine(ShowCoinFalling());
+                //show coin animation as fall from top of box to down small rotate anim
+            }
             if (PushBoxHandler.Instance.PushBoxState==GameManager.pushBoxState.MovingDown && _CoinState!=GameManager.coinState.ReadyToCollide)
             {
                 //show coin animation
                 _CoinState = GameManager.coinState.ReadyToCollide;
                 //move littlebit down
             }
+
+        }
+        IEnumerator ShowCoinFalling()
+        {
+            //ShowFalling Animation
+            //iTween.ScaleTo(this.gameObject, iTween.Hash("y", 0f, "time", 0.7f, "islocal", true, "easetype", iTween.EaseType.linear));
+
+            //iTween.ScaleTo(this.gameObject, iTween.Hash("x", 0.2f, "time", 0.3f, "islocal", true, "easetype", iTween.EaseType.linear));
+            //yield return new WaitForSeconds(0.3f);
+            //iTween.ScaleTo(this.gameObject, iTween.Hash("x", 0.2f, "time", 0.3f, "islocal", true, "easetype", iTween.EaseType.linear));
+            CoinFallAnimator.enabled = true;
+            yield return new WaitForSeconds(1.2f);
+            Destroy(gameObject);
         }
     }
 }

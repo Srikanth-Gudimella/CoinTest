@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
         FallingFinish,
         AttachedToParent,
         DetachFromParent,
-        ReadyToCollide
+        ReadyToCollide,
+        Collected
     }
     public enum pushBoxState
     {

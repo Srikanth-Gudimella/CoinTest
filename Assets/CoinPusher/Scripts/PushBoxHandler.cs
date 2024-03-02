@@ -32,11 +32,12 @@ namespace CoinPusher
             //AttachedCoinsList.Clear();
             PushBoxState = GameManager.pushBoxState.MovingDown;
             PushBoxPushCollider.isTrigger = false;
-
+            RemoveAllAttachedCoins();
             iTween.Stop(gameObject);
             iTween.MoveTo(gameObject,iTween.Hash("y", 3.3f, "time", MoveTime, "islocal", true, "easetype", easetype));
             Invoke(nameof(MoveUp), MoveTime+0.1f);
         }
+       
         void MoveUp()
         {
             PushBoxState = GameManager.pushBoxState.Movingup;
@@ -47,6 +48,16 @@ namespace CoinPusher
             iTween.MoveTo(gameObject,iTween.Hash("y", 5.5f, "time", MoveTime, "islocal", true, "easetype", easetype));
             Invoke(nameof(MoveDown), MoveTime + 0.1f);
         }
-       
+        void RemoveAllAttachedCoins()
+        {
+            for(int i= AttachedCoinsList.Count-1; i>=0;i--)
+            {
+                CoinHandler _coinHandler = AttachedCoinsList[i].GetComponent<CoinHandler>();
+                AttachedCoinsList.Remove(AttachedCoinsList[i]);
+                _coinHandler.transform.SetParent(PushBoxHandler.Instance.PlayArea);
+                _coinHandler._CoinState = GameManager.coinState.ReadyToCollide;
+            }
+        }
+
     }
 }
