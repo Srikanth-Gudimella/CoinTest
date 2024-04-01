@@ -1,0 +1,9 @@
+light.png
+size:165,422
+filter:Linear,Linear
+pma:true
+respins/light
+bounds:2,188,148,232
+offsets:8,11,167,252
+respins/light_hand
+bounds:2,2,161,184

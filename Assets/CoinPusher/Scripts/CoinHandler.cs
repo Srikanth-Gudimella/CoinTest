@@ -1,3 +1,4 @@
+using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace CoinPusher
         public bool IsReadyWithCollisions;
         public GameManager.coinState _CoinState;
         public Animator CoinFallAnimator;
+        public SkeletonAnimation coinSkeleton;
 
         private void Awake()
         {
@@ -24,7 +26,8 @@ namespace CoinPusher
 
         private void Start()
         {
-           
+
+            //coinSkeleton.loop = true;
 
         }
         public LayerMask layerMask; // The layer(s) to check against
@@ -60,6 +63,7 @@ namespace CoinPusher
             yield return new WaitForSeconds(0);
             iTween.Stop(gameObject);
             iTween.MoveTo(gameObject, iTween.Hash("y", 0.5f, "time", MoveTime, "islocal", true, "easetype", easetype));
+            //coinSkeleton.loop = false;
             yield return new WaitForSeconds(MoveTime+0.05f);
             _CoinState = GameManager.coinState.FallingFinish;
             thisCollider.isTrigger = false;

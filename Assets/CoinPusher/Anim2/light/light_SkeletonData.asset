@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
-  m_Name: coin_animation_SkeletonData
+  m_Name: light_SkeletonData
   m_EditorClassIdentifier: 
-  atlasAssets:
-  - {fileID: 11400000, guid: 69f57a212d97fb24890b5fa8faa249d5, type: 2}
+  atlasAssets: []
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: 15722b8acdd429f4491d9eeae1b4abf0, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: 757dd0b0f42a03a4bbf957d333085e72, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 0

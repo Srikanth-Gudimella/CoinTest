@@ -1,0 +1,13 @@
+Dutara.png
+size:223,612
+filter:Linear,Linear
+pma:true
+gem
+bounds:2,136,143,150
+offsets:0,3,143,153
+rotate:90
+gem_glow
+bounds:2,2,132,132
+offsets:3,3,137,137
+sun_rays_1
+bounds:2,281,219,329

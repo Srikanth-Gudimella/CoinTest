@@ -1,0 +1,12 @@
+Lotus.png
+size:223,632
+filter:Linear,Linear
+pma:true
+scale:0.99875
+glows/sun_rays_1
+bounds:2,301,219,329
+respins_reels_boost/gem
+bounds:2,136,164,163
+respins_reels_boost/gem_glow
+bounds:2,2,132,132
+offsets:3,3,137,137

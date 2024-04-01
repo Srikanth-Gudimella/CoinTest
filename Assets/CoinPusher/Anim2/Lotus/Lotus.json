@@ -1,0 +1,252 @@
+{
+"skeleton": { "hash": "tKB+yF1nZ0I", "spine": "4.1.24" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "Lotus", "parent": "root" },
+	{ "name": "text", "parent": "Lotus", "x": -293.5, "y": 23.45, "transform": "noScale" },
+	{ "name": "gem", "parent": "text", "x": 95.58, "y": 0.09 },
+	{
+		"name": "gem_rays",
+		"parent": "gem",
+		"rotation": 177.68,
+		"x": 7.37,
+		"y": 4.19,
+		"scaleX": 0.4302,
+		"scaleY": 1.015,
+		"transform": "noScale"
+	},
+	{
+		"name": "gem_rays2",
+		"parent": "gem",
+		"rotation": -118.42,
+		"x": -21.27,
+		"y": 13.74,
+		"scaleX": 1.0346,
+		"scaleY": 0.7721,
+		"transform": "noScale"
+	},
+	{
+		"name": "gem_rays3",
+		"parent": "gem",
+		"rotation": -18.06,
+		"x": 7.37,
+		"y": 10.55,
+		"scaleX": 1.3486,
+		"scaleY": 0.8736,
+		"transform": "noScale"
+	},
+	{
+		"name": "gem_rays4",
+		"parent": "gem",
+		"rotation": 105.94,
+		"x": 23.28,
+		"y": 10.55,
+		"scaleX": 1.0125,
+		"scaleY": 0.7911,
+		"transform": "noScale"
+	}
+],
+"slots": [
+	{ "name": "gem", "bone": "gem" },
+	{ "name": "gem_glow", "bone": "gem", "blend": "additive" },
+	{ "name": "glows/sun_rays_5", "bone": "gem_rays", "blend": "additive" },
+	{ "name": "glows/sun_rays_6", "bone": "gem_rays2", "blend": "additive" },
+	{ "name": "glows/sun_rays_8", "bone": "gem_rays4", "blend": "additive" },
+	{ "name": "glows/sun_rays_7", "bone": "gem_rays3", "blend": "additive" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"gem": {
+				"respins_reels_boost/gem": { "width": 164, "height": 163 }
+			},
+			"gem_glow": {
+				"respins_reels_boost/gem_glow": { "x": 2.83, "y": -0.62, "scaleX": 1.095, "scaleY": 1.095, "width": 137, "height": 137 }
+			},
+			"glows/sun_rays_5": {
+				"glows/sun_rays_1": { "x": 0.5, "y": -131.59, "width": 219, "height": 329 }
+			},
+			"glows/sun_rays_6": {
+				"glows/sun_rays_1": { "x": 0.5, "y": -131.59, "width": 219, "height": 329 }
+			},
+			"glows/sun_rays_7": {
+				"glows/sun_rays_1": { "x": 0.5, "y": -131.59, "width": 219, "height": 329 }
+			},
+			"glows/sun_rays_8": {
+				"glows/sun_rays_1": { "x": 0.5, "y": -131.59, "width": 219, "height": 329 }
+			}
+		}
+	}
+],
+"events": {
+	"to unlock_disappear text": {}
+},
+"animations": {
+	"loop": {
+		"slots": {
+			"gem": {
+				"attachment": [
+					{ "name": "respins_reels_boost/gem" }
+				]
+			},
+			"gem_glow": {
+				"rgba": [
+					{ "color": "ffffff00" },
+					{ "time": 0.2667, "color": "ffffffff" },
+					{ "time": 0.5, "color": "ffffff00" }
+				],
+				"attachment": [
+					{ "name": "respins_reels_boost/gem_glow" }
+				]
+			},
+			"glows/sun_rays_5": {
+				"rgba": [
+					{
+						"color": "0092ff00",
+						"curve": [ 0.058, 0, 0.175, 0, 0.058, 0.57, 0.175, 0.71, 0.058, 1, 0.175, 1, 0.058, 0, 0.175, 1 ]
+					},
+					{
+						"time": 0.2333,
+						"color": "00b4ffff",
+						"curve": [ 0.478, 0, 0.558, 0, 0.478, 0.71, 0.558, 0.71, 0.478, 1, 0.558, 1, 0.478, 1, 0.558, 0 ]
+					},
+					{ "time": 0.6667, "color": "00b4ff00" }
+				],
+				"attachment": [
+					{ "name": "glows/sun_rays_1" }
+				]
+			},
+			"glows/sun_rays_6": {
+				"rgba": [
+					{
+						"color": "0092ff00",
+						"curve": [ 0.058, 0, 0.175, 0, 0.058, 0.57, 0.175, 0.71, 0.058, 1, 0.175, 1, 0.058, 0, 0.175, 1 ]
+					},
+					{
+						"time": 0.2333,
+						"color": "00b4ffff",
+						"curve": [ 0.478, 0, 0.558, 0, 0.478, 0.71, 0.558, 0.71, 0.478, 1, 0.558, 1, 0.478, 1, 0.558, 0 ]
+					},
+					{ "time": 0.6667, "color": "00b4ff00" }
+				],
+				"attachment": [
+					{ "name": "glows/sun_rays_1" }
+				]
+			},
+			"glows/sun_rays_7": {
+				"rgba": [
+					{
+						"color": "0092ff00",
+						"curve": [ 0.058, 0, 0.175, 0, 0.058, 0.57, 0.175, 0.71, 0.058, 1, 0.175, 1, 0.058, 0, 0.175, 1 ]
+					},
+					{
+						"time": 0.2333,
+						"color": "00b4ffff",
+						"curve": [ 0.478, 0, 0.558, 0, 0.478, 0.71, 0.558, 0.71, 0.478, 1, 0.558, 1, 0.478, 1, 0.558, 0 ]
+					},
+					{ "time": 0.6667, "color": "00b4ff00" }
+				],
+				"attachment": [
+					{ "name": "glows/sun_rays_1" }
+				]
+			},
+			"glows/sun_rays_8": {
+				"rgba": [
+					{
+						"color": "0092ff00",
+						"curve": [ 0.058, 0, 0.175, 0, 0.058, 0.57, 0.175, 0.71, 0.058, 1, 0.175, 1, 0.058, 0, 0.175, 1 ]
+					},
+					{
+						"time": 0.2333,
+						"color": "00b4ffff",
+						"curve": [ 0.478, 0, 0.558, 0, 0.478, 0.71, 0.558, 0.71, 0.478, 1, 0.558, 1, 0.478, 1, 0.558, 0 ]
+					},
+					{ "time": 0.6667, "color": "00b4ff00" }
+				],
+				"attachment": [
+					{ "name": "glows/sun_rays_1" }
+				]
+			}
+		},
+		"bones": {
+			"gem": {
+				"scale": [
+					{},
+					{ "time": 0.3333, "x": 1.05, "y": 1.05 },
+					{ "time": 0.5 }
+				]
+			},
+			"text": {
+				"translate": [
+					{ "x": 215.34 }
+				]
+			},
+			"gem_rays": {
+				"rotate": [
+					{
+						"curve": [ 0.175, 0, 0.525, -9.68 ]
+					},
+					{ "time": 0.7, "value": -9.68 }
+				],
+				"scale": [
+					{
+						"x": 0.425,
+						"y": 0.425,
+						"curve": [ 0.175, 0.425, 0.525, 1.419, 0.175, 0.425, 0.525, 1.419 ]
+					},
+					{ "time": 0.7, "x": 1.419, "y": 1.419 }
+				]
+			},
+			"gem_rays2": {
+				"rotate": [
+					{
+						"curve": [ 0.175, 0, 0.525, -9.68 ]
+					},
+					{ "time": 0.7, "value": -9.68 }
+				],
+				"scale": [
+					{
+						"x": 0.425,
+						"y": 0.425,
+						"curve": [ 0.175, 0.425, 0.525, 1.419, 0.175, 0.425, 0.525, 1.419 ]
+					},
+					{ "time": 0.7, "x": 1.419, "y": 1.419 }
+				]
+			},
+			"gem_rays3": {
+				"rotate": [
+					{
+						"curve": [ 0.175, 0, 0.525, -9.68 ]
+					},
+					{ "time": 0.7, "value": -9.68 }
+				],
+				"scale": [
+					{
+						"x": 0.425,
+						"y": 0.425,
+						"curve": [ 0.175, 0.425, 0.525, 1.419, 0.175, 0.425, 0.525, 1.419 ]
+					},
+					{ "time": 0.7, "x": 1.419, "y": 1.419 }
+				]
+			},
+			"gem_rays4": {
+				"rotate": [
+					{
+						"curve": [ 0.175, 0, 0.525, -9.68 ]
+					},
+					{ "time": 0.7, "value": -9.68 }
+				],
+				"scale": [
+					{
+						"x": 0.425,
+						"y": 0.425,
+						"curve": [ 0.175, 0.425, 0.525, 1.419, 0.175, 0.425, 0.525, 1.419 ]
+					},
+					{ "time": 0.7, "x": 1.419, "y": 1.419 }
+				]
+			}
+		}
+	}
+}
+}

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: coin_animation_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: 69f57a212d97fb24890b5fa8faa249d5, type: 2}
+  - {fileID: 11400000, guid: 3d2893d2701c6c64483352f3123095f4, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: 15722b8acdd429f4491d9eeae1b4abf0, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: ac0a6f1e2b383e84894fc8714c9c4f6f, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 0
