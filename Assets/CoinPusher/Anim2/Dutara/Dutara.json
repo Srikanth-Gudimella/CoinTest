@@ -1,10 +1,10 @@
 {
-"skeleton": { "hash": "hxnpOW1tmpw", "spine": "4.1.24", "x": -69.77, "y": -73.52, "width": 143, "height": 153 },
+"skeleton": { "hash": "MpR+nmsW59Y", "spine": "4.1.24" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "Dutara", "parent": "root" },
-	{ "name": "text", "parent": "Dutara", "x": -93.85, "y": 2.89, "transform": "noScale" },
-	{ "name": "gem", "parent": "text", "x": 95.58, "y": 0.09 },
+	{ "name": "text", "parent": "Dutara", "transform": "noScale" },
+	{ "name": "gem", "parent": "text" },
 	{
 		"name": "gem_rays",
 		"parent": "gem",
@@ -44,12 +44,11 @@
 		"scaleX": 1.0125,
 		"scaleY": 0.7911,
 		"transform": "noScale"
-	},
-	{ "name": "gem_glow", "parent": "gem", "scaleX": 0.5, "scaleY": 0.5 }
+	}
 ],
 "slots": [
-	{ "name": "gem", "bone": "gem", "attachment": "gem" },
-	{ "name": "gem_glow", "bone": "gem_glow", "blend": "additive" },
+	{ "name": "gem", "bone": "gem" },
+	{ "name": "gem_glow", "bone": "gem", "blend": "additive" },
 	{ "name": "glows/sun_rays_5", "bone": "gem_rays", "blend": "additive" },
 	{ "name": "glows/sun_rays_6", "bone": "gem_rays2", "blend": "additive" },
 	{ "name": "glows/sun_rays_8", "bone": "gem_rays4", "blend": "additive" },
@@ -60,22 +59,22 @@
 		"name": "default",
 		"attachments": {
 			"gem": {
-				"gem": { "width": 143, "height": 153 }
+				"Dutara": { "width": 143, "height": 153 }
 			},
 			"gem_glow": {
-				"gem_glow": { "x": 2.83, "y": -0.62, "scaleX": 1.095, "scaleY": 1.095, "width": 137, "height": 137 }
+				"Dutara": { "x": 2.83, "y": -0.62, "scaleX": 1.095, "scaleY": 1.095, "width": 143, "height": 153 }
 			},
 			"glows/sun_rays_5": {
-				"sun_rays_1": { "x": 0.5, "y": -131.59, "width": 219, "height": 329 }
+				"glows/sun_rays_1": { "x": 0.5, "y": -131.59, "width": 219, "height": 329 }
 			},
 			"glows/sun_rays_6": {
-				"sun_rays_1": { "x": 0.5, "y": -131.59, "width": 219, "height": 329 }
+				"glows/sun_rays_1": { "x": 0.5, "y": -131.59, "width": 219, "height": 329 }
 			},
 			"glows/sun_rays_7": {
-				"sun_rays_1": { "x": 0.5, "y": -131.59, "width": 219, "height": 329 }
+				"glows/sun_rays_1": { "x": 0.5, "y": -131.59, "width": 219, "height": 329 }
 			},
 			"glows/sun_rays_8": {
-				"sun_rays_1": { "x": 0.5, "y": -131.59, "width": 219, "height": 329 }
+				"glows/sun_rays_1": { "x": 0.5, "y": -131.59, "width": 219, "height": 329 }
 			}
 		}
 	}
@@ -86,6 +85,11 @@
 "animations": {
 	"loop": {
 		"slots": {
+			"gem": {
+				"attachment": [
+					{ "name": "Dutara" }
+				]
+			},
 			"gem_glow": {
 				"rgba": [
 					{ "color": "ffffff00" },
@@ -93,7 +97,7 @@
 					{ "time": 0.5, "color": "ffffff00" }
 				],
 				"attachment": [
-					{ "name": "gem_glow" }
+					{ "name": "Dutara" }
 				]
 			},
 			"glows/sun_rays_5": {
@@ -110,7 +114,7 @@
 					{ "time": 0.6667, "color": "00b4ff00" }
 				],
 				"attachment": [
-					{ "name": "sun_rays_1" }
+					{ "name": "glows/sun_rays_1" }
 				]
 			},
 			"glows/sun_rays_6": {
@@ -127,7 +131,7 @@
 					{ "time": 0.6667, "color": "00b4ff00" }
 				],
 				"attachment": [
-					{ "name": "sun_rays_1" }
+					{ "name": "glows/sun_rays_1" }
 				]
 			},
 			"glows/sun_rays_7": {
@@ -144,7 +148,7 @@
 					{ "time": 0.6667, "color": "00b4ff00" }
 				],
 				"attachment": [
-					{ "name": "sun_rays_1" }
+					{ "name": "glows/sun_rays_1" }
 				]
 			},
 			"glows/sun_rays_8": {
@@ -161,7 +165,7 @@
 					{ "time": 0.6667, "color": "00b4ff00" }
 				],
 				"attachment": [
-					{ "name": "sun_rays_1" }
+					{ "name": "glows/sun_rays_1" }
 				]
 			}
 		},
@@ -171,11 +175,6 @@
 					{},
 					{ "time": 0.3333, "x": 1.05, "y": 1.05 },
 					{ "time": 0.5 }
-				]
-			},
-			"text": {
-				"translate": [
-					{ "x": 215.34 }
 				]
 			},
 			"gem_rays": {

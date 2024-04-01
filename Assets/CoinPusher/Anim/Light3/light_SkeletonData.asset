@@ -12,16 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
   m_Name: light_SkeletonData
   m_EditorClassIdentifier: 
-  atlasAssets: []
+  atlasAssets:
+  - {fileID: 11400000, guid: 696f4dead3decde4a9ae87c379f6610e, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: 757dd0b0f42a03a4bbf957d333085e72, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: 5ad0f40ad5cab7541aeaf9dc45e10d05, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 0
     applyAdditiveMaterial: 1
     additiveMaterials: []
     multiplyMaterials: []
-    screenMaterials: []
+    screenMaterials:
+    - pageName: light.png
+      material: {fileID: 2100000, guid: bb45436a720849044b652a7abc00f883, type: 2}
   skeletonDataModifiers: []
   fromAnimation: []
   toAnimation: []
