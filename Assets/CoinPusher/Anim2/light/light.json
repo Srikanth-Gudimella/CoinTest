@@ -1,0 +1,77 @@
+{
+"skeleton": { "hash": "4WRRQRSlkSk", "spine": "4.1.24", "x": -169.56, "y": -184.01, "width": 339.12, "height": 368.02 },
+"bones": [
+	{ "name": "root" },
+	{ "name": "Main_Anim", "parent": "root" },
+	{ "name": "light_hand", "parent": "Main_Anim" },
+	{
+		"name": "flame",
+		"parent": "Main_Anim",
+		"rotation": 30.02,
+		"x": -82.75,
+		"y": 155.52,
+		"scaleX": 4.0724,
+		"scaleY": 3.1031
+	}
+],
+"slots": [
+	{ "name": "light_hand", "bone": "light_hand", "attachment": "light_hand" },
+	{ "name": "root", "bone": "Main_Anim" },
+	{ "name": "flame", "bone": "flame", "blend": "additive" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"flame": {
+				"flame/flame-001": { "x": 3.6, "y": 53.15, "width": 50, "height": 128 },
+				"flame/flame-002": { "x": 3.6, "y": 53.15, "width": 50, "height": 128 },
+				"flame/flame-003": { "x": 3.6, "y": 53.15, "width": 50, "height": 128 },
+				"flame/flame-004": { "x": 3.6, "y": 53.15, "width": 50, "height": 128 },
+				"flame/flame-005": { "x": 3.6, "y": 53.15, "width": 50, "height": 128 },
+				"flame/flame-006": { "x": 3.6, "y": 53.15, "width": 50, "height": 128 },
+				"flame/flame-007": { "x": 3.6, "y": 53.15, "width": 50, "height": 128 },
+				"flame/flame-008": { "x": 3.6, "y": 53.15, "width": 50, "height": 128 },
+				"flame/flame-009": { "x": 3.6, "y": 53.15, "width": 50, "height": 128 },
+				"flame/flame-010": { "x": 3.6, "y": 53.15, "width": 50, "height": 128 },
+				"flame/flame-011": { "x": 3.6, "y": 53.15, "width": 50, "height": 128 },
+				"flame/flame-012": { "x": 3.6, "y": 53.15, "width": 50, "height": 128 },
+				"flame/flame-013": { "x": 3.6, "y": 53.15, "width": 50, "height": 128 },
+				"flame/flame-014": { "x": 3.6, "y": 53.15, "width": 50, "height": 128 },
+				"flame/flame-015": { "x": 3.6, "y": 53.15, "scaleX": 1.5444, "width": 50, "height": 128 }
+			},
+			"light_hand": {
+				"light_hand": { "scaleX": 1.7, "scaleY": 1.7, "rotation": -13.49, "width": 161, "height": 184 }
+			}
+		}
+	}
+],
+"events": {
+	"to unlock_disappear text": {}
+},
+"animations": {
+	"light": {
+		"slots": {
+			"flame": {
+				"attachment": [
+					{ "name": "flame/flame-001" },
+					{ "time": 0.0333, "name": "flame/flame-002" },
+					{ "time": 0.0667, "name": "flame/flame-003" },
+					{ "time": 0.1, "name": "flame/flame-004" },
+					{ "time": 0.1333, "name": "flame/flame-005" },
+					{ "time": 0.1667, "name": "flame/flame-006" },
+					{ "time": 0.2, "name": "flame/flame-007" },
+					{ "time": 0.2333, "name": "flame/flame-008" },
+					{ "time": 0.2667, "name": "flame/flame-009" },
+					{ "time": 0.3, "name": "flame/flame-010" },
+					{ "time": 0.3333, "name": "flame/flame-011" },
+					{ "time": 0.3667, "name": "flame/flame-012" },
+					{ "time": 0.4, "name": "flame/flame-013" },
+					{ "time": 0.4333, "name": "flame/flame-014" },
+					{ "time": 0.4667, "name": "flame/flame-015" }
+				]
+			}
+		}
+	}
+}
+}
