@@ -207,15 +207,15 @@ namespace CoinPusher
             {
                 case 0://Left
                     iTween.Stop(gameObject);
-                    iTween.MoveTo(gameObject, iTween.Hash("x", gameObject.transform.position.x-0.3f, "time", 0.3f, "islocal", true, "easetype", easetype));
+                    iTween.MoveTo(gameObject, iTween.Hash("x", gameObject.transform.position.x-0.4f, "y", gameObject.transform.position.y - 0.5f, "time", 1f, "islocal", true, "easetype", easetype));
                     break;
                 case 1://Right
                     iTween.Stop(gameObject);
-                    iTween.MoveTo(gameObject, iTween.Hash("x", gameObject.transform.position.x + 0.35f, "time", 0.3f, "islocal", true, "easetype", easetype));
+                    iTween.MoveTo(gameObject, iTween.Hash("x", gameObject.transform.position.x + 0.6f, "y", gameObject.transform.position.y - 0.5f, "time", 1f, "islocal", true, "easetype", easetype));
                     break;
                 case 2://Down
                     iTween.Stop(gameObject);
-                    iTween.MoveTo(gameObject, iTween.Hash("y", gameObject.transform.position.y - 1f, "time", 0.3f, "islocal", true, "easetype", easetype));
+                    iTween.MoveTo(gameObject, iTween.Hash("y", gameObject.transform.position.y - 1.4f, "time", 1f, "islocal", true, "easetype", easetype));
                     break;
             }
 

@@ -433,7 +433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoinPrefab: {fileID: 3403535061093684415, guid: 0c8a134decc1e8e44b567c82c8f3c41d, type: 3}
-  GenerateSpeed: 2
+  GenerateSpeed: 1
 --- !u!1 &173063318
 GameObject:
   m_ObjectHideFlags: 0
