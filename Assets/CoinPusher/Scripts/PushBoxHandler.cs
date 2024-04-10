@@ -54,7 +54,7 @@ namespace CoinPusher
             {
                 CoinHandler _coinHandler = AttachedCoinsList[i].GetComponent<CoinHandler>();
                 AttachedCoinsList.Remove(AttachedCoinsList[i]);
-                _coinHandler.transform.SetParent(PushBoxHandler.Instance.PlayArea);
+                _coinHandler.transform.SetParent(GameManager.Instance.CoinsParent);
                 _coinHandler._CoinState = GameManager.coinState.ReadyToCollide;
             }
         }

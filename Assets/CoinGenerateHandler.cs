@@ -36,7 +36,7 @@ namespace CoinPusher
                 //Vector3 SpawnPosition = new Vector3((-1.4f+i*1f), 4.5f, -0.1f);
                 //this is left to right distance, -2 to 2
                 Vector3 SpawnPosition = new Vector3((startPos+(i*eachgap) + (Random.Range(-0.5f,0.6f))), 4.5f, -0.1f);
-                Instantiate(CoinPrefab, SpawnPosition, Quaternion.identity, PushBoxHandler.Instance.PlayArea);
+                Instantiate(CoinPrefab, SpawnPosition, Quaternion.identity, GameManager.Instance.CoinsParent);
             }
         }
         // Update is called once per frame

@@ -130,7 +130,7 @@ namespace CoinPusher
                 Debug.Log("----- coin triggered to hills");
                 _CoinState = GameManager.coinState.DetachFromParent;
                 PushBoxHandler.Instance.AttachedCoinsList.Remove(this.gameObject);
-                transform.SetParent(PushBoxHandler.Instance.PlayArea);
+                transform.SetParent(GameManager.Instance.CoinsParent);
                 _CoinState = GameManager.coinState.ReadyToCollide;
                 StartCoroutine(MoveDownToBoard());
                 //show coin animation as fall from top of box to down small rotate anim
@@ -147,7 +147,7 @@ namespace CoinPusher
                 if (PushBoxHandler.Instance.AttachedCoinsList.Contains(this.gameObject))
                 {
                     PushBoxHandler.Instance.AttachedCoinsList.Remove(this.gameObject);
-                    transform.SetParent(PushBoxHandler.Instance.PlayArea);
+                    transform.SetParent(GameManager.Instance.CoinsParent);
                 }
 
                
@@ -166,7 +166,7 @@ namespace CoinPusher
                 if (PushBoxHandler.Instance.AttachedCoinsList.Contains(this.gameObject))
                 {
                     PushBoxHandler.Instance.AttachedCoinsList.Remove(this.gameObject);
-                    transform.SetParent(PushBoxHandler.Instance.PlayArea);
+                    transform.SetParent(GameManager.Instance.CoinsParent);
                 }
 
 
@@ -175,7 +175,7 @@ namespace CoinPusher
             }
             else if (collision.gameObject.CompareTag("DownBorder"))
             {
-                Debug.Log("----- coin triggered to Border");
+                Debug.Log("----- coin triggered to Down Border");
                 //Time.timeScale = 0;
                 thisCollider.isTrigger = true;
 
@@ -185,7 +185,7 @@ namespace CoinPusher
                 if (PushBoxHandler.Instance.AttachedCoinsList.Contains(this.gameObject))
                 {
                     PushBoxHandler.Instance.AttachedCoinsList.Remove(this.gameObject);
-                    transform.SetParent(PushBoxHandler.Instance.PlayArea);
+                    transform.SetParent(GameManager.Instance.CoinsParent);
                 }
 
 
@@ -207,7 +207,7 @@ namespace CoinPusher
             {
                 case 0://Left
                     iTween.Stop(gameObject);
-                    iTween.MoveTo(gameObject, iTween.Hash("x", gameObject.transform.position.x-0.4f, "y", gameObject.transform.position.y - 0.5f, "time", 1f, "islocal", true, "easetype", easetype));
+                    iTween.MoveTo(gameObject, iTween.Hash("x", gameObject.transform.position.x-0.5f, "y", gameObject.transform.position.y - 0.5f, "time", 1f, "islocal", true, "easetype", easetype));
                     break;
                 case 1://Right
                     iTween.Stop(gameObject);
@@ -228,7 +228,40 @@ namespace CoinPusher
             CoinFallAnimator.enabled = true;
             CoinFallAnimator.SetTrigger(animTriggerValue);
             yield return new WaitForSeconds(1.2f);
+
+            //Vector3 SpawnPosition = new Vector3((startPos + (i * eachgap) + (Random.Range(-0.5f, 0.6f))), 4.5f, -0.1f);
+            if (BorderType == 2)
+                SpawnScoreAnim();
             Destroy(gameObject);
+
+            //Instantiate score anim effect
+        }
+
+        void SpawnScoreAnim()
+        {
+            bool IsAviableScoreAnimObj=false;
+            for(int i=0;i<GameManager.Instance.ScoreAnimHandlerList.Count;i++)
+            {
+                if(GameManager.Instance.ScoreAnimHandlerList[i].IsReady)
+                {
+                    GameManager.Instance.ScoreAnimHandlerList[i].transform.position = transform.position;
+                    GameManager.Instance.ScoreAnimHandlerList[i].transform.SetParent(PushBoxHandler.Instance.PlayArea);
+                    GameManager.Instance.ScoreAnimHandlerList[i].gameObject.SetActive(true);
+                    GameManager.Instance.ScoreAnimHandlerList[i].StartAnim();
+                    IsAviableScoreAnimObj = true;
+                    break;
+                }
+            }
+            if(!IsAviableScoreAnimObj)
+            {
+                GameObject obj= Instantiate(GameManager.Instance.ScoreAnimObj, transform.position, Quaternion.identity, PushBoxHandler.Instance.PlayArea);
+                ScoreAnimHandler _ScoreAnimHandler = obj.GetComponent<ScoreAnimHandler>();
+                GameManager.Instance.ScoreAnimHandlerList.Add(_ScoreAnimHandler);
+                //_ScoreAnimHandler.IsReady = false;
+                _ScoreAnimHandler.StartAnim();
+                Debug.LogError("--------- Instantiating coin score anim");
+
+            }
         }
     }
 }
