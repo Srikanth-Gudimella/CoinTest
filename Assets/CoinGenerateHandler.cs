@@ -7,10 +7,11 @@ namespace CoinPusher
     public class CoinGenerateHandler : MonoBehaviour
     {
         public GameObject CoinPrefab;
+        public float GenerateSpeed = 3;
         // Start is called before the first frame update
         void Start()
         {
-            InvokeRepeating(nameof(GenerateCoin), 1, 3);
+            InvokeRepeating(nameof(GenerateCoin), 1, GenerateSpeed);
 
            //GenerateCoin();
         }

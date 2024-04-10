@@ -14,14 +14,25 @@ namespace CoinPusher
         public GameManager.coinState _CoinState;
         public Animator CoinFallAnimator;
         public SkeletonAnimation coinSkeleton;
+        public bool IsSplPiece=false;
 
         private void Awake()
         {
-            _CoinState = GameManager.coinState.Falling;
-            IsReadyWithCollisions = false;
-            thisCollider = GetComponent<CircleCollider2D>();
-            //Invoke(nameof(MoveDown), 0f);
-            StartCoroutine(MoveDown());
+            if (IsSplPiece)
+            {
+                _CoinState = GameManager.coinState.ReadyToCollide;
+                IsReadyWithCollisions = true;
+                thisCollider = GetComponent<CircleCollider2D>();
+                thisCollider.isTrigger = false;
+            }
+            else
+            {
+                _CoinState = GameManager.coinState.Falling;
+                IsReadyWithCollisions = false;
+                thisCollider = GetComponent<CircleCollider2D>();
+                //Invoke(nameof(MoveDown), 0f);
+                StartCoroutine(MoveDown());
+            }
         }
 
         private void Start()
@@ -143,10 +154,9 @@ namespace CoinPusher
                 StartCoroutine(ShowCoinFalling("FallSide",0));
                 //show coin animation as fall from top of box to down small rotate anim
             }
-            else if (collision.gameObject.CompareTag("RightBorder" +
-                ""))
+            else if (collision.gameObject.CompareTag("RightBorder"))
             {
-                Debug.Log("----- coin triggered to Border");
+                Debug.Log("----- coin triggered to Right Border");
                 //Time.timeScale = 0;
                 thisCollider.isTrigger = true;
 
