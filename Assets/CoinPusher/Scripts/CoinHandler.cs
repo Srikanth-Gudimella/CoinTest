@@ -7,31 +7,51 @@ namespace CoinPusher
 { 
     public class CoinHandler : MonoBehaviour
     {
+        public float CoinValue;
+
         public float MoveTime = 1.5f;
         public iTween.EaseType easetype;
-        public CircleCollider2D thisCollider;
+        public Collider2D thisCollider;
         public bool IsReadyWithCollisions;
         public GameManager.coinState _CoinState;
         public Animator CoinFallAnimator;
         public SkeletonAnimation coinSkeleton;
+        public SpriteRenderer ThisSpriteRenderer;
         public bool IsSplPiece=false;
+        public bool IsAlreadyOnBoard;
+        public CoinGenerateHandler.PieceType CurrentPieceType;
 
         private void Awake()
         {
-            if (IsSplPiece)
+            ThisSpriteRenderer = GetComponent<SpriteRenderer>();
+            if (IsSplPiece && IsAlreadyOnBoard)
             {
                 _CoinState = GameManager.coinState.ReadyToCollide;
                 IsReadyWithCollisions = true;
-                thisCollider = GetComponent<CircleCollider2D>();
+                thisCollider = GetComponent<Collider2D>();
+                thisCollider.isTrigger = false;
+            }
+            else if(!IsSplPiece && IsAlreadyOnBoard)
+            {
+                _CoinState = GameManager.coinState.ReadyToCollide;
+                IsReadyWithCollisions = true;
+                thisCollider = GetComponent<Collider2D>();
                 thisCollider.isTrigger = false;
             }
             else
             {
                 _CoinState = GameManager.coinState.Falling;
                 IsReadyWithCollisions = false;
-                thisCollider = GetComponent<CircleCollider2D>();
+                thisCollider = GetComponent<Collider2D>();
                 //Invoke(nameof(MoveDown), 0f);
                 StartCoroutine(MoveDown());
+                if (IsSplPiece)
+                {
+                    ThisSpriteRenderer.enabled = false;
+                    //coinSkeleton.gameObject.SetActive(false);
+                    //CoinFallAnimator.enabled = true;
+                    //CoinFallAnimator.SetTrigger("FallInit");
+                }
             }
         }
 
@@ -55,7 +75,7 @@ namespace CoinPusher
                 // Check if the ray hits anything
                 if (hit.collider != null)
                 {
-                    Debug.Log("-------- Object is above another collider!");
+                    //Debug.Log("-------- Object is above another collider! collidername="+hit.collider.name);
                     //gameObject.transform.SetParent(hit.collider.gameObject.transform);
                     gameObject.transform.SetParent(PushBoxHandler.Instance.transform);
                    // gameObject.transform.SetParent(PushBoxHandler.Instance.PushBoxParentArea);
@@ -78,6 +98,8 @@ namespace CoinPusher
             yield return new WaitForSeconds(MoveTime+0.05f);
             _CoinState = GameManager.coinState.FallingFinish;
             thisCollider.isTrigger = false;
+            coinSkeleton.gameObject.SetActive(true);
+            ThisSpriteRenderer.enabled = false;
 
             //IsReadyWithCollisions = true;
 
@@ -123,11 +145,17 @@ namespace CoinPusher
 
             //Invoke(nameof(MoveUp), MoveTime + 0.1f);
         }
+        ColliderController CurrentColliderController=null;
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.CompareTag("Hills") && _CoinState == GameManager.coinState.AttachedToParent)
+            CurrentColliderController = null;
+            if (collision.gameObject.GetComponent<ColliderController>() != null)
             {
-                Debug.Log("----- coin triggered to hills");
+                CurrentColliderController = collision.gameObject.GetComponent<ColliderController>();
+            }
+            if (CurrentColliderController!=null && CurrentColliderController.CurrentColliderType==ColliderController.ColliderType.Hills && _CoinState == GameManager.coinState.AttachedToParent)
+            {
+                //Debug.Log("----- coin triggered to hills");
                 _CoinState = GameManager.coinState.DetachFromParent;
                 PushBoxHandler.Instance.AttachedCoinsList.Remove(this.gameObject);
                 transform.SetParent(GameManager.Instance.CoinsParent);
@@ -135,9 +163,9 @@ namespace CoinPusher
                 StartCoroutine(MoveDownToBoard());
                 //show coin animation as fall from top of box to down small rotate anim
             }
-            else if (collision.gameObject.CompareTag("Border"))
+            else if (CurrentColliderController != null && CurrentColliderController.CurrentColliderType == ColliderController.ColliderType.LeftBorder)
             {
-                Debug.Log("----- coin triggered to Border");
+                //Debug.Log("----- coin triggered to Border name="+gameObject.name+":::BorderName="+ collision.gameObject.name);
                 //Time.timeScale = 0;
                 thisCollider.isTrigger = true;
                
@@ -154,9 +182,9 @@ namespace CoinPusher
                 StartCoroutine(ShowCoinFalling("FallSide",0));
                 //show coin animation as fall from top of box to down small rotate anim
             }
-            else if (collision.gameObject.CompareTag("RightBorder"))
+            else if (CurrentColliderController != null && CurrentColliderController.CurrentColliderType == ColliderController.ColliderType.RightBorder)
             {
-                Debug.Log("----- coin triggered to Right Border");
+                //Debug.Log("----- coin triggered to Right Border");
                 //Time.timeScale = 0;
                 thisCollider.isTrigger = true;
 
@@ -173,7 +201,8 @@ namespace CoinPusher
                 StartCoroutine(ShowCoinFalling("FallSide",1));
                 //show coin animation as fall from top of box to down small rotate anim
             }
-            else if (collision.gameObject.CompareTag("DownBorder"))
+            //else if (collision.gameObject.CompareTag("DownBorder"))
+            else if (CurrentColliderController != null && CurrentColliderController.CurrentColliderType == ColliderController.ColliderType.DownBorder)
             {
                 Debug.Log("----- coin triggered to Down Border");
                 //Time.timeScale = 0;
@@ -232,13 +261,15 @@ namespace CoinPusher
             //Vector3 SpawnPosition = new Vector3((startPos + (i * eachgap) + (Random.Range(-0.5f, 0.6f))), 4.5f, -0.1f);
             if (BorderType == 2)
                 SpawnScoreAnim();
+            CoinGenerateHandler.Instance.NextPieceType = CurrentPieceType;
             Destroy(gameObject);
 
             //Instantiate score anim effect
         }
-
+        float FinalCoinValue;
         void SpawnScoreAnim()
         {
+            Debug.Log("--------- SpawnScore Anim CoinValue="+CoinValue);
             bool IsAviableScoreAnimObj=false;
             for(int i=0;i<GameManager.Instance.ScoreAnimHandlerList.Count;i++)
             {
@@ -247,7 +278,15 @@ namespace CoinPusher
                     GameManager.Instance.ScoreAnimHandlerList[i].transform.position = transform.position;
                     GameManager.Instance.ScoreAnimHandlerList[i].transform.SetParent(PushBoxHandler.Instance.PlayArea);
                     GameManager.Instance.ScoreAnimHandlerList[i].gameObject.SetActive(true);
-                    GameManager.Instance.ScoreAnimHandlerList[i].StartAnim();
+                    if(IsSplPiece)
+                    {
+                        FinalCoinValue = CoinValue * 10;
+                    }
+                    else
+                    {
+                        FinalCoinValue = CoinValue * 2;
+                    }
+                    GameManager.Instance.ScoreAnimHandlerList[i].StartAnim(FinalCoinValue);
                     IsAviableScoreAnimObj = true;
                     break;
                 }
@@ -258,7 +297,15 @@ namespace CoinPusher
                 ScoreAnimHandler _ScoreAnimHandler = obj.GetComponent<ScoreAnimHandler>();
                 GameManager.Instance.ScoreAnimHandlerList.Add(_ScoreAnimHandler);
                 //_ScoreAnimHandler.IsReady = false;
-                _ScoreAnimHandler.StartAnim();
+                if (IsSplPiece)
+                {
+                    FinalCoinValue = CoinValue * 10;
+                }
+                else
+                {
+                    FinalCoinValue = CoinValue * 2;
+                }
+                _ScoreAnimHandler.StartAnim(FinalCoinValue);
                 Debug.LogError("--------- Instantiating coin score anim");
 
             }
